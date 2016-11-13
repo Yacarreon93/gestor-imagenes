@@ -18,4 +18,14 @@ class Album extends Model {
      */
     protected $fillable = ['id', 'nombre', 'descripcion', 'usuario_id'];
 
+    public function fotos()
+    {
+        return $this->hasMany('GestorImagenes\Foto');
+    }
+
+    public function propietario()
+    {
+        return $this->belongsTo('GestorImagenes\Usuario');
+    }
+
 }
