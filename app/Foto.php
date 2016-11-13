@@ -18,4 +18,9 @@ class Foto extends Model {
      */
     protected $fillable = ['id', 'nombre', 'descripcion', 'ruta', 'album_id'];
 
+    public function album() 
+    {
+        return $this->belongsTo('GestorImagenes\Album');
+    }
+
 }
