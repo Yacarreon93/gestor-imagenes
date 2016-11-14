@@ -28,9 +28,10 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
-		return view('home');
+		return "Página de inicio para usuario validado";
+		// return view('home');
 	}
 
 }

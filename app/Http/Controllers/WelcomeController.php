@@ -28,9 +28,10 @@ class WelcomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
-		return view('welcome');
+		return "Página de bienvenida para cualquier usuario";
+		// return view('welcome');
 	}
 
 }
