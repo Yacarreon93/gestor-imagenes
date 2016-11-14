@@ -1,4 +1,4 @@
-<?php namespace GestorImagenes\Http\Controllers\Auth;
+<?php namespace GestorImagenes\Http\Controllers\Validacion;
 
 use GestorImagenes\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
@@ -67,7 +67,7 @@ class ValidacionController extends Controller {
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function postRegister(Request $request)
+	public function postRegistro(Request $request)
 	{
 		$validator = $this->registrar->validator($request->all());
 
@@ -164,7 +164,7 @@ class ValidacionController extends Controller {
 	 */
 	public function loginPath()
 	{
-		return property_exists($this, 'loginPath') ? $this->loginPath : '/validado/login';
+		return property_exists($this, 'loginPath') ? $this->loginPath : '/validacion/login';
 	}
 
 	public function getRecuperar()
