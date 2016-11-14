@@ -10,7 +10,7 @@
 
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<strong>Whoops!</strong> Hubo algún problema con las entradas.<br><br>
 							<ul>
 								@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
@@ -21,10 +21,13 @@
 
 					@if (Session::has('csrf'))
 						<div class="alert alert-danger">
-							<strong>Whoops!</strong> Al parecer algo está mal.<br><br>
-							<ul>
-								<li>{{ Session::get('csrf') }}</li>
-							</ul>
+							{{ Session::get('csrf') }}
+						</div>
+					@endif
+
+					@if (Session::has('recuperada'))
+						<div class="alert alert-success">
+							{{ Session::get('recuperada') }}						
 						</div>
 					@endif
 
