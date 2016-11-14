@@ -11,11 +11,12 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
-
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+Route::controllers(
+[
+	'validacion' => 'Validacion\ValidacionController',
+    'validado' => 'InicioController',
+    'validado/foto' => 'FotoController',
+    'validado/album' => 'AlbumController',
+    'validado/usuario' => 'UsuarioController',
+    '/' => 'BienvenidaController'
 ]);
