@@ -1,6 +1,6 @@
 <?php namespace GestorImagenes\Http\Controllers;
 
-class HomeController extends Controller {
+class InicioController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
