@@ -55,14 +55,15 @@ class FotoController extends Controller {
         $album_id = $request->get('id');
         $imagen = $request->file('imagen');        
 
-        $ruta = '/img/'.sha1(Carbon::now()).$imagen->getExtension();
+        $ruta = '/img/';
+        $nombre_imagen = sha1(Carbon::now()).'.'.$imagen->guessExtension();
 
-        $imagen->move(getcwd().$ruta);
+        $imagen->move(getcwd().$ruta, $nombre_imagen);
 
         Foto::create([
             'nombre' => $request->get('nombre'),
             'descripcion' => $request->get('descripcion'),
-            'ruta' => $ruta,
+            'ruta' => $ruta.$nombre_imagen,
             'album_id' => $album_id
         ]);
 
