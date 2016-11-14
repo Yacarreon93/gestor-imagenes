@@ -11,6 +11,12 @@
 	</div>
 @endif
 
+@if (Session::has('actualizado'))
+	<div class="alert alert-success">
+		{{ Session::get('actualizado') }}
+	</div>
+@endif
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
