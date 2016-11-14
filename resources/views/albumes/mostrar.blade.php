@@ -2,9 +2,15 @@
 
 @section('content')
 
+@if(Session::has('creado'))
+    <div class="alert alert-success">
+        {{ Session::get('creado') }}
+    </div>
+@endif
+
 <div class="container">
 
-    <p><a href="validado/albumes/crear-album" class="btn btn-primary" role="button">Crear Álmun</a></p>
+    <p><a href="albumes/crear-album" class="btn btn-primary" role="button">Crear Álmun</a></p>
 
     @if (sizeof($albumes) > 0)
 
