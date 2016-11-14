@@ -8,6 +8,12 @@
     </div>
 @endif
 
+@if(Session::has('actualizado'))
+    <div class="alert alert-success">
+        {{ Session::get('actualizado') }}
+    </div>
+@endif
+
 <div class="container">
 
     <p><a href="albumes/crear-album" class="btn btn-primary" role="button">Crear Álmun</a></p>
@@ -23,6 +29,7 @@
                             <h3>{{ $album->nombre }}</h3>
                             <p>{{ $album->descripcion }}</p>
                             <p><a href="/validado/fotos?id={{ $album->id }}" class="btn btn-primary" role="button">Ver Fotos</a></p>
+                            <p><a href="/validado/albumes/actualizar-album/{{ $album->id }}" class="btn btn-primary" role="button">Editar Álbum</a></p>
                         </div>                              
                     </div>
                 </div>
