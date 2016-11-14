@@ -55,9 +55,10 @@ class ValidacionController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function getRegister()
+	public function getRegistro()
 	{
-		return view('auth.register');
+		return "Formulario de registro";
+		// return view('auth.register');
 	}
 
 	/**
@@ -89,7 +90,8 @@ class ValidacionController extends Controller {
 	 */
 	public function getLogin()
 	{
-		return view('auth.login');
+		return "Formuario de login";
+		// return view('auth.login');
 	}
 
 	/**
@@ -125,7 +127,7 @@ class ValidacionController extends Controller {
 	 */
 	protected function getFailedLoginMessage()
 	{
-		return 'These credentials do not match our records.';
+		return 'Email o password incorrectos';
 	}
 
 	/**
@@ -152,7 +154,7 @@ class ValidacionController extends Controller {
 			return $this->redirectPath;
 		}
 
-		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/inicio';
 	}
 
 	/**
@@ -162,7 +164,17 @@ class ValidacionController extends Controller {
 	 */
 	public function loginPath()
 	{
-		return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
+		return property_exists($this, 'loginPath') ? $this->loginPath : '/validado/login';
+	}
+
+	public function getRecuperar()
+	{
+		return "Recuperando password";
+	}
+
+	public function postRecuperar()
+	{
+		return "Recuperando password";
 	}
 
 }
