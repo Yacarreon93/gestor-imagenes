@@ -33,4 +33,10 @@ class UsuarioController extends Controller {
         return "Formulario para editar el perfil";
     }
 
+    // Overrided from Controller
+    public function missingMethod($parameters = array())
+    {
+        abort(404);
+    }
+
 }

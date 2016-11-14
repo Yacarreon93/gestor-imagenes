@@ -177,4 +177,10 @@ class ValidacionController extends Controller {
 		return "Recuperando password";
 	}
 
+	// Overrided from Controller
+    public function missingMethod($parameters = array())
+    {
+        abort(404);
+    }
+
 }

@@ -64,4 +64,10 @@ class AlbumController extends Controller {
         // return view('home');
     }
 
+    // Overrided from Controller
+    public function missingMethod($parameters = array())
+    {
+        abort(404);
+    }
+    
 }
