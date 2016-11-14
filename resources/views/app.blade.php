@@ -34,6 +34,9 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="/">Inicio</a></li>
+					@if (Auth::user())
+						<li><a href="/validado/albumes">Mis Álbumes</a></li>
+					@endif
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
