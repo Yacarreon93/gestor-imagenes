@@ -39,7 +39,7 @@ class Handler extends ExceptionHandler {
 	{
 		if($e instanceof TokenMismatchException)
 		{
-			return redirect($request->url())->with('csrf', 'Al parecer pasó mucho tiempo, intenta de nuevo!');
+			return redirect($request->url())->with('csrf', 'Al parecer pasó mucho tiempo, inténtalo de nuevo!');
 		}
 
 		if(config('app.debug'))
