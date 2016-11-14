@@ -17,6 +17,7 @@ class CrearTablaFotos extends Migration {
 			$table->increments('id');
 			$table->string('nombre');
 			$table->string('descripcion');
+			$table->string('ruta');
 			$table->integer('album_id')->unsigned();
 			$table->foreign('album_id')->references('id')->on('albumes');
 			$table->timestamps();
