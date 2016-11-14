@@ -14,9 +14,9 @@
 Route::controllers(
 [
 	'validacion' => 'Validacion\ValidacionController',
-    'validado' => 'InicioController',
     'validado/fotos' => 'FotoController',
     'validado/albumes' => 'AlbumController',
     'validado/usuario' => 'UsuarioController',
+    'validado' => 'InicioController',    
     '/' => 'BienvenidaController'
 ]);
