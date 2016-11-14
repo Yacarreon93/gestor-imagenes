@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <p><a href="validado/fotos/crear-foto" class="btn btn-primary" role="button">Crear Foto</a></p>
+    <p><a href="fotos/crear-foto?id={{ $id }}" class="btn btn-primary" role="button">Crear Foto</a></p>
 
     @if (sizeof($fotos) > 0)
 
