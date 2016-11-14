@@ -1,5 +1,9 @@
 <?php namespace GestorImagenes\Http\Controllers;
 
+use GestorImagenes\Http\Requests\EditarPerfilRequest;
+
+use Illuminate\Support\Facades\Auth;
+
 class UsuarioController extends Controller {
 
     /*
@@ -28,9 +32,28 @@ class UsuarioController extends Controller {
         return view('usuario.actualizar');
     }
 
-    public function postEditarPerfil()
+    public function postEditarPerfil(EditarPerfilRequest $request)
     {
-        return "Formulario para editar el perfil";
+        
+        $nombre = $request->get('nombre');
+
+        $usuario = Auth::user(); 
+        $usuario->nombre = $nombre;
+
+        if ($request->has('pasword'))
+        {
+            $usuario->password = bcrypt($request->get('password'));
+        }
+
+        if ($request->has('pregunta'))
+        {
+            $usuario->pregunta = $request->get('pregunta');
+            $usuario->respuesta = $request->get('respuesta');
+        }
+
+        $usuario->save();
+        
+        return redirect('/validado')->with(['actualizado' => 'Su perfil ha sido actualizado!']);
     }
 
     // Overrided from Controller
