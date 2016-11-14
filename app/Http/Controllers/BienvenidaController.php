@@ -1,6 +1,6 @@
 <?php namespace GestorImagenes\Http\Controllers;
 
-class WelcomeController extends Controller {
+class BienvenidaController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
