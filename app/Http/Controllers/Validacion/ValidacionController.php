@@ -166,8 +166,8 @@ class ValidacionController extends Controller {
 	}
 
 	public function getRecuperar()
-	{
-		return "Recuperando password";
+	{	
+		return view('validacion.recuperar');
 	}
 
 	public function postRecuperar()
