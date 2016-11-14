@@ -25,7 +25,7 @@ class UsuarioController extends Controller {
 
     public function getEditarPerfil()
     {
-        return "Formulario para editar el perfil";
+        return view('usuario.actualizar');
     }
 
     public function postEditarPerfil()
