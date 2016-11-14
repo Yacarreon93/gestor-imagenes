@@ -57,8 +57,7 @@ class ValidacionController extends Controller {
 	 */
 	public function getRegistro()
 	{
-		return "Formulario de registro";
-		// return view('auth.register');
+		return view('validacion.registro');
 	}
 
 	/**
@@ -89,9 +88,8 @@ class ValidacionController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function getLogin()
-	{
-		return "Formuario de login";
-		// return view('auth.login');
+	{		
+		return view('validacion.login');
 	}
 
 	/**

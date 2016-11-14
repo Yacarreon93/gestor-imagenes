@@ -29,9 +29,8 @@ class InicioController extends Controller {
 	 * @return Response
 	 */
 	public function getIndex()
-	{
-		return "Página de inicio para usuario validado";
-		// return view('home');
+	{		
+		return view('inicio');
 	}
 
 }

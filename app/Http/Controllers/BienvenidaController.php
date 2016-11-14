@@ -30,8 +30,7 @@ class BienvenidaController extends Controller {
 	 */
 	public function getIndex()
 	{
-		return "Página de bienvenida para cualquier usuario";
-		// return view('welcome');
+		return view('bienvenida');
 	}
 
 }
