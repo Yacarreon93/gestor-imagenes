@@ -4,8 +4,12 @@ use GestorImagenes\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
 use Illuminate\Http\Request;
 use GestorImagenes\Http\Requests\IniciarSesionRequest;
+use GestorImagenes\Http\Requests\RecuperarPasswordRequest;
+
+use GestorImagenes\Usuario;
 
 class ValidacionController extends Controller {
 
@@ -168,9 +172,25 @@ class ValidacionController extends Controller {
 		return view('validacion.recuperar');
 	}
 
-	public function postRecuperar()
+	public function postRecuperar(RecuperarPasswordRequest $request)
 	{
-		return "Recuperando password";
+		$pregunta = $request->get('pregunta');
+		$respuesta 	= $request->get('respuesta');
+		$email = $request->get('email');
+		$usuario = Usuario::where('email', '=', $email)->first();
+
+		if ($pregunta === $usuario->pregunta && $respuesta === $usuario->respuesta) 
+		{
+			$password = $request->get('password');
+			$usuario->password = bcrypt($password);
+			$usuario->save();
+
+			return redirect('/validacion/login')->with(['recuperada' => 'La contraseña ha sido cambiada!']);
+		} 
+
+		return redirect('/validacion/recuperar')
+				->withInput($request->only('email', 'pregunta'))
+				->withErrors(['pregunta' => 'La pregunta y/o la respuesta ingresadas no coiciden!']);
 	}
 
 	// Overrided from Controller
