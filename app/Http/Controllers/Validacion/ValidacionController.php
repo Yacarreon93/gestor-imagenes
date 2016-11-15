@@ -1,8 +1,6 @@
 <?php namespace GestorImagenes\Http\Controllers\Validacion;
 
 use GestorImagenes\Http\Controllers\Controller;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Illuminate\Http\Request;
@@ -10,6 +8,9 @@ use GestorImagenes\Http\Requests\IniciarSesionRequest;
 use GestorImagenes\Http\Requests\RecuperarPasswordRequest;
 
 use GestorImagenes\Usuario;
+
+use Validator;
+use Auth;
 
 class ValidacionController extends Controller {
 
@@ -27,34 +28,15 @@ class ValidacionController extends Controller {
 	/**
 	 * Create a new authentication controller instance.
 	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
-	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
 	 * @return void
 	 */
-	public function __construct(Guard $auth, Registrar $registrar)
+	public function __construct()
 	{
-		$this->auth = $auth;
-		$this->registrar = $registrar;
-
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
 	// Las siguientes líneas son una copia del trait:
 	// use AuthenticatesAndRegistersUsers;
-
-	/**
-	 * The Guard implementation.
-	 *
-	 * @var \Illuminate\Contracts\Auth\Guard
-	 */
-	protected $auth;
-
-	/**
-	 * The registrar implementation.
-	 *
-	 * @var \Illuminate\Contracts\Auth\Registrar
-	 */
-	protected $registrar;
 
 	/**
 	 * Show the application registration form.
@@ -74,7 +56,7 @@ class ValidacionController extends Controller {
 	 */
 	public function postRegistro(Request $request)
 	{
-		$validator = $this->registrar->validator($request->all());
+		$validator = $this->validator($request->all());
 
 		if ($validator->fails())
 		{
@@ -83,7 +65,7 @@ class ValidacionController extends Controller {
 			);
 		}
 
-		$this->auth->login($this->registrar->create($request->all()));
+		Auth::login($this->create($request->all()));
 
 		return redirect($this->redirectPath());
 	}
@@ -108,7 +90,7 @@ class ValidacionController extends Controller {
 	{
 		$credentials = $request->only('email', 'password');
 
-		if ($this->auth->attempt($credentials, $request->has('remember')))
+		if (Auth::attempt($credentials, $request->has('remember')))
 		{
 			return redirect()->intended($this->redirectPath());
 		}
@@ -137,7 +119,7 @@ class ValidacionController extends Controller {
 	 */
 	public function getLogout()
 	{
-		$this->auth->logout();
+		Auth::logout();
 
 		return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
 	}
@@ -198,5 +180,39 @@ class ValidacionController extends Controller {
     {
         abort(404);
     }
+
+    /**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array  $data
+	 * @return \Illuminate\Contracts\Validation\Validator
+	 */
+	public function validator(array $data)
+	{
+		return Validator::make($data, [
+			'nombre' => 'required|max:255',
+			'email' => 'required|email|max:255|unique:usuarios',
+			'password' => 'required|confirmed|min:6',
+			'pregunta' => 'required|max:255',
+			'respuesta' => 'required|max:255'
+		]);
+	}
+
+	/**
+	 * Create a new user instance after a valid registration.
+	 *
+	 * @param  array  $data
+	 * @return User
+	 */
+	public function create(array $data)
+	{
+		return Usuario::create([
+			'nombre' => $data['nombre'],
+			'email' => $data['email'],
+			'password' => bcrypt($data['password']),
+			'pregunta' => $data['pregunta'],
+			'respuesta' => $data['respuesta'],
+		]);
+	}
 
 }
