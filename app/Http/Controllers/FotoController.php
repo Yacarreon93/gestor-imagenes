@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use GestorImagenes\Http\Requests\MostrarFotosRequest;
 use GestorImagenes\Http\Requests\CrearFotoRequest;
 use GestorImagenes\Http\Requests\ActualizarFotoRequest;
+use GestorImagenes\Http\Requests\EliminarFotoRequest;
 
 use Carbon\Carbon;
 
@@ -109,16 +110,20 @@ class FotoController extends Controller {
         return redirect('/validado/fotos?id='.$foto->album_id)->with('actualizado', 'La foto se ha actualizado!');     
     }
 
-    public function getEliminarFoto()
+    public function postEliminarFoto(EliminarFotoRequest $request)
     {
-        return "Formulario para eliminar foto";
-        // return view('home');
-    }
+        $foto = Foto::find($request->get('id'));
 
-    public function postEliminarFoto()
-    {
-        return "Formulario para eliminar foto";
-        // return view('home');
+        $ruta_anterior = getcwd().$foto->ruta;
+
+        if (file_exists($ruta_anterior)) 
+        {
+            unlink(realpath($ruta_anterior));
+        }
+
+        $foto->delete();
+
+        return redirect('/validado/fotos?id='.$foto->album_id)->with('eliminado', 'La foto se ha eliminado!');
     }
 
     // Overrided from Controller
