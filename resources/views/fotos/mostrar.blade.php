@@ -2,6 +2,13 @@
 
 @section('content')
 
+@if (Session::has('creado'))
+    <div class="alert alert-success">
+        {{ Session::get('creado') }}
+    </div>
+@endif
+
+
 @if (Session::has('actualizado'))
     <div class="alert alert-success">
         {{ Session::get('actualizado') }}
