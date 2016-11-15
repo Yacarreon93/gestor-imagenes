@@ -27,9 +27,10 @@
 
     @if (sizeof($fotos) > 0)
 
-        @foreach ($fotos as $foto)
+        <div class="row">
 
-            <div class="row">
+        @foreach ($fotos as $foto)
+            
                 <div class="col-sm-6 col-md-6">
                     <div class="thumbnail">  
                         <img src="{{ $foto->ruta }}">      
@@ -46,10 +47,11 @@
 
                         </div>                              
                     </div>
-                </div>
-            </div>
+                </div>            
 
         @endforeach
+
+        </div>
 
     @else
 

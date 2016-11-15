@@ -26,10 +26,11 @@
 
     @if (sizeof($albumes) > 0)
 
-        @foreach ($albumes as $album)
+        <div class="row">
 
-            <div class="row">
-                <div class="col-sm-6 col-md-6">
+        @foreach ($albumes as $album)
+            
+                <div class="col-sm-4 col-md-4">
                     <div class="thumbnail">        
                         <div class="caption">
                             <h3>{{ $album->nombre }}</h3>
@@ -45,10 +46,11 @@
 
                         </div>                              
                     </div>
-                </div>
-            </div>
+                </div>            
 
         @endforeach
+
+        </div>
 
     @else
 
