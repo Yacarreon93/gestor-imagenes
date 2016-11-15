@@ -14,6 +14,12 @@
     </div>
 @endif
 
+@if(Session::has('eliminado'))
+    <div class="alert alert-danger">
+        {{ Session::get('eliminado') }}
+    </div>
+@endif
+
 <div class="container">
 
     <p><a href="albumes/crear-album" class="btn btn-primary" role="button">Crear Álmun</a></p>
@@ -30,6 +36,13 @@
                             <p>{{ $album->descripcion }}</p>
                             <p><a href="/validado/fotos?id={{ $album->id }}" class="btn btn-primary" role="button">Ver Fotos</a></p>
                             <p><a href="/validado/albumes/actualizar-album/{{ $album->id }}" class="btn btn-primary" role="button">Editar Álbum</a></p>
+
+                            <form class="form-horizontal" role="form" method="POST" action="/validado/albumes/eliminar-album">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="id" value="{{ $album->id }}">
+                                <input type="submit" class="btn btn-danger" role="button" value="Eliminar">
+                            </form>
+
                         </div>                              
                     </div>
                 </div>
