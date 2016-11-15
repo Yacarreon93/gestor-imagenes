@@ -8,6 +8,12 @@
     </div>
 @endif
 
+@if(Session::has('eliminado'))
+    <div class="alert alert-danger">
+        {{ Session::get('eliminado') }}
+    </div>
+@endif
+
 <div class="container">
 
     <p><a href="fotos/crear-foto?id={{ $id }}" class="btn btn-primary" role="button">Crear Foto</a></p>
@@ -23,7 +29,14 @@
                         <div class="caption">
                             <h3>{{ $foto->nombre }}</h3>
                             <p>{{ $foto->descripcion }}</p>  
-                            <p><a href="/validado/fotos/actualizar-foto/{{ $foto->id }}" class="btn btn-primary" role="button">Editar Foto</a></p>                      
+                            <p><a href="/validado/fotos/actualizar-foto/{{ $foto->id }}" class="btn btn-primary" role="button">Editar Foto</a></p>  
+
+                            <form class="form-horizontal" role="form" method="POST" action="/validado/fotos/eliminar-foto">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="id" value="{{ $foto->id }}">
+                                <input type="submit" class="btn btn-danger" role="button" value="Eliminar">
+                            </form>
+
                         </div>                              
                     </div>
                 </div>
