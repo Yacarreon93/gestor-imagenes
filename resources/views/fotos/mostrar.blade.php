@@ -2,6 +2,12 @@
 
 @section('content')
 
+@if (Session::has('actualizado'))
+    <div class="alert alert-success">
+        {{ Session::get('actualizado') }}
+    </div>
+@endif
+
 <div class="container">
 
     <p><a href="fotos/crear-foto?id={{ $id }}" class="btn btn-primary" role="button">Crear Foto</a></p>
@@ -16,7 +22,8 @@
                         <img src="{{ $foto->ruta }}">      
                         <div class="caption">
                             <h3>{{ $foto->nombre }}</h3>
-                            <p>{{ $foto->descripcion }}</p>                        
+                            <p>{{ $foto->descripcion }}</p>  
+                            <p><a href="/validado/fotos/actualizar-foto/{{ $foto->id }}" class="btn btn-primary" role="button">Editar Foto</a></p>                      
                         </div>                              
                     </div>
                 </div>
