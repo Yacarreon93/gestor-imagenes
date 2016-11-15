@@ -80,7 +80,21 @@ class AlbumController extends Controller {
     {
         $album = Album::find($request->get('id'));
 
-        $album->fotos()->delete();
+        $fotos = $album->fotos;
+        
+        foreach ($fotos as $foto) {
+            
+            $ruta_anterior = getcwd().$foto->ruta;
+
+            if (file_exists($ruta_anterior)) 
+            {
+                unlink(realpath($ruta_anterior));
+            }
+
+            $foto->delete();
+
+        }
+
         $album->delete();
 
         return redirect('/validado/albumes')->with(['eliminado' => 'El álbum fue eliminado!']);
